@@ -1,4 +1,9 @@
 fn main() {
+    // These generated files are embedded with include_bytes!. Explicitly track them
+    // so a new package can never reuse a portable packer containing an older payload.
+    println!("cargo:rerun-if-changed=data.bin");
+    println!("cargo:rerun-if-changed=app_metadata.toml");
+
     #[cfg(windows)]
     {
         use std::io::Write;
